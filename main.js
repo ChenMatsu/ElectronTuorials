@@ -2,7 +2,9 @@
  * @Note Electron follows typical JavaScript convetions, where PascalCase
  *          modules are instantiable class constructors, whereas camelCase 
  *          modules are not instantiable
+ *          
  */
+const path = require('path');
 const { app, BrowserWindow } = require('electron');
 /**
  * @Warn ECMAScript modules are currently not directly supported in Electron.
@@ -16,6 +18,9 @@ const createWindow = () => {
     const window = new BrowserWindow({
         width: 800,
         height: 600,
+        webPreferences: {
+            preload: path.join(__dirname, 'preload.js')
+        },
     });
 
     window.loadFile('index.html');
@@ -47,7 +52,7 @@ app.on('window-all-closed', () => {
 });
 
 
-console.log(`Hello from Electron! Time to experience the power of JavaScript and Electon.js!`);
+// console.log(`Hello from Electron! Time to experience the power of JavaScript and Electon.js!`);
 
 
 
